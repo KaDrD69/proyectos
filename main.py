@@ -25,20 +25,21 @@ dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo
 def main(page: ft.Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
-
-    
+   
     #por buena práctica voy a usar funciones y variables privadas como _c o _top que solo deben ser tratadas dentro de la funcion main
 
-    def _expandir(e: ft.ControlEvent):
-        estado = {"estado": True}        
-        if e.name == "click" and estado["estado"]:
+    expandido = True #esta variable después la uso como nonlocal para acceder a ella, necesito simular una especie de switch/estados entre clicks (no existe en flet)
+
+    def _expandir(e):
+        nonlocal expandido
+        if e.name == "click" and expandido:
             _c.content.controls[0].height=560
             _c.content.controls[0].update()
         else:
             _c.content.controls[0].height=660 * 0.4
             _c.content.controls[0].update()
-        estado["estado"] = not estado["estado"]
-    
+        expandido = not expandido
+
     def _top():
         top = ft.Container(
             width=300,
@@ -50,10 +51,9 @@ def main(page: ft.Page):
             ),
             border_radius=10,
             animate=ft.Animation(duration=350, curve="decelerate"),
-            on_click=_expandir #podría usar lambda e: _expandir(e) en caso de def _expandir(e)
+            on_click=lambda e: _expandir(e) #podríamos usar solo _expandir siempre y cuando en la funcion sea : _expandir(e: ft.ControlEvent)
         )
         return top
-
 
     _c = ft.Container(
         width=310,
@@ -70,3 +70,4 @@ def main(page: ft.Page):
 
 if __name__ == "__main__" : #aunque no es necesario con tan poco código y sabemos que vamos usar un solo fichero, si es una buena práctica
     ft.app(target=main, assets_dir = None)
+
