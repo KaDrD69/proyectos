@@ -47,7 +47,7 @@ def main(page: ft.Page):
             gradient=ft.LinearGradient(
                 begin=ft.alignment.bottom_left,
                 end=ft.alignment.top_right,
-                colors=["#ff6600", "#ffcc00"]
+                colors=["#66add0", "#0e83bf"]
             ),
             border_radius=20,
             animate=ft.Animation(duration=350, curve="decelerate"),
@@ -62,15 +62,41 @@ def main(page: ft.Page):
                         alignment="center",
                         controls=[
                             ft.Text("Nombre Ciudad",
-                                    size=16,
-                                    weight = "bold",                                    
-                                    color=ft.Colors.BLACK),                           
+                                    size=15,
+                                    weight = "W_700",                                    
+                                    color=ft.Colors.WHITE),                           
                         ]
                     ),
-                    ft.Container(
-                        content = ft.Image(
-                            src="parcial.png"
-                        )
+                    # ft.Container(
+                    #     padding=ft.padding.only(bottom=20)
+                    # ),
+                    ft.Row(
+                        alignment="center",
+                        spacing=10,
+                        controls=[
+                            ft.Column(
+                                controls=[
+                                    ft.Container(
+                                        width=100,
+                                        height=100,
+                                        content=ft.Image(src="parcial.png"),
+                                        
+                                    )
+                                ]
+                            ),
+                            ft.Column(
+                                spacing=5,
+                                #horizontal_alignment="center",
+                                controls=[
+                                    ft.Text(
+                                        "Hoy",
+                                        size=14,
+                                        #text_align="center",
+                                    )   
+                                ]
+                            )
+                        ]
+
                     )
 
                 ]
