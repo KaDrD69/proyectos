@@ -49,9 +49,33 @@ def main(page: ft.Page):
                 end=ft.alignment.top_right,
                 colors=["#ff6600", "#ffcc00"]
             ),
-            border_radius=10,
+            border_radius=20,
             animate=ft.Animation(duration=350, curve="decelerate"),
-            on_click=lambda e: _expandir(e) #podríamos usar solo _expandir siempre y cuando en la funcion sea : _expandir(e: ft.ControlEvent)
+            on_click=lambda e: _expandir(e), #podríamos usar solo _expandir siempre y cuando en la funcion sea : _expandir(e: ft.ControlEvent)
+            padding=15,
+            margin=5,
+            content = ft.Column(
+                alignment="start",
+                spacing=10,
+                controls=[
+                    ft.Row(
+                        alignment="center",
+                        controls=[
+                            ft.Text("Nombre Ciudad",
+                                    size=16,
+                                    weight = "bold",                                    
+                                    color=ft.Colors.BLACK),                           
+                        ]
+                    ),
+                    ft.Container(
+                        content = ft.Image(
+                            src="parcial.png"
+                        )
+                    )
+
+                ]
+                
+            )
         )
         return top
 
@@ -69,5 +93,5 @@ def main(page: ft.Page):
 
 
 if __name__ == "__main__" : #aunque no es necesario con tan poco código y sabemos que vamos usar un solo fichero, si es una buena práctica
-    ft.app(target=main, assets_dir = None)
+    ft.app(target=main, assets_dir = "images")
 
