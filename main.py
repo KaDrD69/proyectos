@@ -19,6 +19,9 @@ def obtener_clima(ciudad):
             
     else:
         return f"Ocurrio un error {respuesta}"
+datos = obtener_clima("Punta Arenas") #se maneja como global
+#print("datos" in globals())
+#print(datos.get("Ciudad"))
 
 dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
@@ -61,7 +64,7 @@ def main(page: ft.Page):
                     ft.Row(
                         alignment="center",
                         controls=[
-                            ft.Text("Nombre Ciudad",
+                            ft.Text(datos.get("Ciudad"),
                                     size=15,
                                     weight = "W_700",                                    
                                     color=ft.Colors.WHITE),                           
@@ -71,16 +74,15 @@ def main(page: ft.Page):
                     #     padding=ft.padding.only(bottom=20)
                     # ),
                     ft.Row(
-                        alignment="center",
-                        spacing=10,
+                        alignment="left",
+                        spacing=20,
                         controls=[
                             ft.Column(
                                 controls=[
-                                    ft.Container(
+                                    ft.Container(                                        
                                         width=100,
                                         height=100,
-                                        content=ft.Image(src="parcial.png"),
-                                        
+                                        content=ft.Image(src="parcial.png"),                                       
                                     )
                                 ]
                             ),
