@@ -4,7 +4,7 @@ import requests
 
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
-def obtener_clima(ciudad):
+def obtener_clima(ciudad): #función totalmente aparte de la parte gráfica.
     PARAMETROS = {"q":ciudad , "appid":API_KEY2, "units":"metric"}
     respuesta = requests.get(BASE_URL,PARAMETROS)
     if respuesta.status_code == 200:
@@ -32,7 +32,8 @@ def main(page: ft.Page):
     #por buena práctica voy a usar funciones y variables privadas como _c o _top que solo deben ser tratadas dentro de la funcion main
 
     expandido = True #esta variable después la uso como nonlocal para acceder a ella, necesito simular una especie de switch/estados entre clicks (no existe en flet)
-
+    
+    #animación
     def _expandir(e):
         nonlocal expandido
         if e.name == "click" and expandido:
@@ -58,7 +59,7 @@ def main(page: ft.Page):
             padding=15,
             margin=5,
             content = ft.Column(
-                alignment="start",
+                alignment="start", #solamente para ser explicito, ya que una columna en flet por defecto parte desde arriba.
                 spacing=10,
                 controls=[
                     ft.Row(
@@ -74,12 +75,12 @@ def main(page: ft.Page):
                     #     padding=ft.padding.only(bottom=20)
                     # ),
                     ft.Row(
-                        alignment="left",
+                        alignment="center",
                         spacing=20,
                         controls=[
                             ft.Column(
                                 controls=[
-                                    ft.Container(                                        
+                                    ft.Container( #contenedores ofrecen mas decoradores, a diferencia de row o column que son como layouts                                     
                                         width=100,
                                         height=100,
                                         content=ft.Image(src="parcial.png"),                                       
@@ -88,12 +89,36 @@ def main(page: ft.Page):
                             ),
                             ft.Column(
                                 spacing=5,
-                                #horizontal_alignment="center",
+                                horizontal_alignment="center",
                                 controls=[
                                     ft.Text(
                                         "Hoy",
+                                        color=ft.Colors.WHITE,
                                         size=14,
                                         #text_align="center",
+                                    ),
+                                    ft.Row(
+                                        alignment="center",
+                                        spacing=0,
+                                        controls=[
+                                            ft.Container(
+                                                content=ft.Text(
+                                                    int(datos.get("Temperatura")),
+                                                    size=40,
+                                                )
+                                            ),
+                                            ft.Container(
+                                                content=ft.Text(
+                                                    "°",
+                                                    size=40,
+                                                )
+                                            )
+                                        ]
+                                    ),
+                                    ft.Text(
+                                        datos.get("Condiciones"),
+                                        size=14,
+                                        color=ft.Colors.WHITE,
                                     )   
                                 ]
                             )
