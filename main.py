@@ -5,21 +5,26 @@ import requests
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
 def obtener_clima(ciudad): #función totalmente aparte de la parte gráfica.
-    PARAMETROS = {"q":ciudad , "appid":API_KEY2, "units":"metric"}
+    PARAMETROS = {"q":ciudad , "appid":API_KEY2, "lang":"es", "units":"metric"}
     respuesta = requests.get(BASE_URL,PARAMETROS)
+    print(respuesta.json())
     if respuesta.status_code == 200:
         info = respuesta.json()
         return {"Ciudad":info["name"],
                 "Longitud":info["coord"]["lon"],
                 "Latitud":info["coord"]["lat"],
                 "Temperatura":info["main"]["temp"],
-                "Condiciones":info["weather"][0]["main"],
-                "Viento":info["wind"]["speed"]
+                "Condiciones":info["weather"][0]["description"],
+                "Viento":info["wind"]["speed"],
+                "Humedad":info["main"]["humidity"],
+                "Temp_min":info["main"]["temp_min"],
+                "Temp_max":info["main"]["temp_max"],
         }
             
     else:
         return f"Ocurrio un error {respuesta}"
 datos = obtener_clima("Punta Arenas") #se maneja como global
+print(datos.get("Humedad"))
 #print("datos" in globals())
 #print(datos.get("Ciudad"))
 
@@ -40,14 +45,14 @@ def main(page: ft.Page):
             _c.content.controls[0].height=560
             _c.content.controls[0].update()
         else:
-            _c.content.controls[0].height=660 * 0.4
+            _c.content.controls[0].height=660 * 0.28
             _c.content.controls[0].update()
         expandido = not expandido
 
     def _top():
         top = ft.Container(
             width=300,
-            height=660 * 0.40, #40% de la altura
+            height=660 * 0.28, #28% de la altura
             gradient=ft.LinearGradient(
                 begin=ft.alignment.bottom_left,
                 end=ft.alignment.top_right,
@@ -121,9 +126,22 @@ def main(page: ft.Page):
                                         color=ft.Colors.WHITE,
                                     )   
                                 ]
-                            )
+                            ),                         
                         ]
 
+                    ),
+                    ft.Row(
+                        alignment="center",
+                        controls=[
+                            ft.Container(
+                                width=200,
+                                height=2,
+                                bgcolor=ft.Colors.BLACK,
+                                opacity=0.3,
+                            )
+                        ]
+                        
+                        
                     )
 
                 ]
