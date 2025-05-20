@@ -30,6 +30,19 @@ print(datos.get("Humedad"))
 
 dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
+def icono(condiciones):
+    iconos = [
+        "cielo despejado",
+        "pocas nubes",
+        "nubes dispersas",
+        "nubes rotas",
+        "lluvia",
+        "lluvia de ducha",
+        "tomenta",
+        "nieve",
+        "niebla"
+    ]
+
 def main(page: ft.Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
