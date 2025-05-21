@@ -44,6 +44,16 @@ def icono(condiciones):
     ]
 
 def main(page: ft.Page):
+
+    #valores que pongo solo en desarrollo, luego esto se debe borrar
+    page.window.width = 360
+    page.window.height = 660
+    page.window.resizable = False
+
+    #valores que debo usar cuando se lance la aplicacion:
+    #ancho = page.window.width
+    #alto = page.window.height
+
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
    
@@ -55,17 +65,17 @@ def main(page: ft.Page):
     def _expandir(e):
         nonlocal expandido
         if e.name == "click" and expandido:
-            _c.content.controls[0].height=560
+            _c.content.controls[0].height=page.window.height*0.80
             _c.content.controls[0].update()
         else:
-            _c.content.controls[0].height=660 * 0.28
+            _c.content.controls[0].height=page.window.height*0.28
             _c.content.controls[0].update()
         expandido = not expandido
 
     def _top():
         top = ft.Container(
-            width=300,
-            height=660 * 0.28, #28% de la altura
+            width=page.window.width,
+            height=page.window.height * 0.28, #28% de la altura
             gradient=ft.LinearGradient(
                 begin=ft.alignment.bottom_left,
                 end=ft.alignment.top_right,
@@ -99,9 +109,9 @@ def main(page: ft.Page):
                             ft.Column(
                                 controls=[
                                     ft.Container( #contenedores ofrecen mas decoradores, a diferencia de row o column que son como layouts                                     
-                                        width=100,
-                                        height=100,
-                                        content=ft.Image(src="parcial.png"),                                       
+                                        width=120,
+                                        height=120,
+                                        content=ft.Image(src="weezle-cloud-sun.png"),                                       
                                     )
                                 ]
                             ),
@@ -155,6 +165,45 @@ def main(page: ft.Page):
                         ]
                         
                         
+                    ),
+                    ft.Row(
+                        alignment="center",
+                        controls=[
+                            ft.Container(
+                                width=120,
+                                height=120,
+                                padding=5,
+                                border=ft.border.all(3),
+                                content=ft.Text("Contenedor1"),
+                            ),
+                            ft.Container(
+                                width=120,
+                                height=120,
+                                padding=5,
+                                border=ft.border.all(3),
+                                content=ft.Text("Contenedor2"),
+                            ),
+                        ]
+                    ),
+                    ft.Row(
+                        alignment="center",
+                        controls=[
+                            ft.Container(
+                                width=200,
+                                height=200,
+                                padding=50,
+                                border=ft.border.all(3),
+                                content=ft.Text("Contenedor3"),
+                            )
+                        ]
+                    ),
+                    ft.Row(
+                        alignment="center",
+                        controls=[
+                            ft.Text(
+                                "Fila3"
+                            )
+                        ]
                     )
 
                 ]
@@ -164,12 +213,13 @@ def main(page: ft.Page):
         return top
 
     _c = ft.Container(
-        width=310,
-        height=660,
+        #width=310,
+        #height=660,
+        expand=True,
         border_radius=25,
         bgcolor="black",
         padding=5,
-        content=ft.Stack(width = 300, height = 550, controls=[_top()]),
+        content=ft.Stack(controls=[_top()]),
                 
     )
     page.add(_c)
