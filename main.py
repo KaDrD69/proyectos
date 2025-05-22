@@ -28,7 +28,7 @@ print(datos.get("Humedad"))
 #print("datos" in globals())
 #print(datos.get("Ciudad"))
 
-dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+#dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
 def icono(condiciones):
     iconos = [
@@ -162,50 +162,72 @@ def main(page: ft.Page):
                                 bgcolor=ft.Colors.BLACK,
                                 opacity=0.3,
                             )
-                        ]
-                        
-                        
+                        ]                                               
                     ),
                     ft.Row(
                         alignment="center",
                         controls=[
-                            ft.Container(
-                                width=120,
-                                height=120,
-                                padding=5,
-                                border=ft.border.all(3),
-                                content=ft.Text("Contenedor1"),
+                            ft.Column(
+                                horizontal_alignment="center",
+                                spacing=5,
+                                controls=[
+                                    ft.Container(
+                                        width=120,
+                                        height=120,
+                                        border=ft.border.all(3),
+                                        content=ft.Container(
+                                            width=80,
+                                            height=80,
+                                            content=ft.Image(
+                                                src="minimalista/ic-water.png",
+                                                
+                                                )
+                                        )
+                                    )
+                                ]
+                                
                             ),
-                            ft.Container(
-                                width=120,
-                                height=120,
-                                padding=5,
-                                border=ft.border.all(3),
-                                content=ft.Text("Contenedor2"),
+                            ft.Column(
+                                horizontal_alignment="center",
+                                spacing=5,
+                                controls=[
+                                    ft.Container(
+                                        width=page.window.width *0.35,
+                                        height=120,
+                                        border=ft.border.all(3),
+                                    )
+                                ]
                             ),
                         ]
                     ),
                     ft.Row(
                         alignment="center",
                         controls=[
-                            ft.Container(
-                                width=200,
-                                height=200,
-                                padding=50,
-                                border=ft.border.all(3),
-                                content=ft.Text("Contenedor3"),
-                            )
+                            ft.Column(
+                                horizontal_alignment="center",
+                                spacing=5,
+                                controls=[
+                                    ft.Container(
+                                        width=page.window.width * 0.35,
+                                        height=120,
+                                        border=ft.border.all(3),
+                                    )
+                                ]
+                                
+                            ),
+                            ft.Column(
+                                horizontal_alignment="center",
+                                spacing=5,
+                                controls=[
+                                    ft.Container(
+                                        width=page.window.width *0.35,
+                                        height=120,
+                                        border=ft.border.all(3),
+                                    )
+                                ]
+                            ),
                         ]
                     ),
-                    ft.Row(
-                        alignment="center",
-                        controls=[
-                            ft.Text(
-                                "Fila3"
-                            )
-                        ]
-                    )
-
                 ]
                 
             )
